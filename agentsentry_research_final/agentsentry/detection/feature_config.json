@@ -1,0 +1,11 @@
+{
+  "feature_mode": "handengineered",
+  "n_features": 6,
+  "n_training_samples": 190,
+  "n_estimators": 150,
+  "contamination": 0.05,
+  "benchmark_source": [
+    "AgentDojo",
+    "InjecAgent"
+  ]
+}

@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+requests
+pandas
+numpy
+scikit-learn
+joblib
+langgraph
+langchain-core
+langchain-anthropic
+langchain-openai
+sentence-transformers
