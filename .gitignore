@@ -1,7 +1,0 @@
-venv/
-__pycache__/
-*.pyc
-opa.exe
-opa
-telemetry/audit_log.db
-*.log
