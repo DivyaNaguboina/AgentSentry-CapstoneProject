@@ -1,7 +1,6 @@
 """
 detection/anomaly_model.py
 
-
 Trains an Isolation Forest on ONLY normal session features, then scores
 new sessions (normal or attack) at inference time.
 
