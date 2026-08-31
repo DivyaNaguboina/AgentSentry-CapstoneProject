@@ -82,7 +82,7 @@ async def evaluate_action(request: ToolCallRequest):
         "session_id": request.session_id,
         "tool_name": request.tool_name,
         "user_role": request.user_role,
-        **result
+        **result,
     })
 
     return result
