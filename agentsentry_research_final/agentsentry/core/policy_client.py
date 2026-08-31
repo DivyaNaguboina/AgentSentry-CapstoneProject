@@ -22,7 +22,7 @@ def evaluate_policy(tool_name: str, arguments: dict, user_role: str) -> tuple[bo
             "user_role": user_role,
         }
     }
-    try
+    try:
         response = requests.post(OPA_URL, json=payload, timeout=1.0)
         allowed = response.json().get("result", False)
         return allowed, False
