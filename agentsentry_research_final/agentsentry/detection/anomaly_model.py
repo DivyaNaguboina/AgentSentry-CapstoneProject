@@ -9,7 +9,7 @@ sessions it never saw during training:
     python anomaly_model.py
 """
 
-
+import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 import joblib
