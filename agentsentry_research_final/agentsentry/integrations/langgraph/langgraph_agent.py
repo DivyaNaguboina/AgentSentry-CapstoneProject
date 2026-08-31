@@ -138,25 +138,8 @@ class AgentState(TypedDict):
 # ── Dynamic Model Discovery for Groq ─────────────────────────────────────
 
 def get_active_groq_model(api_key: str) -> str:
-    """Queries Groq directly to find an active chat model with verified tool calling support."""
-    # Priority ordered by speed and native function-calling reliability
-    preferred_models = [
-        "llama-3.3-70b-versatile",
-        "llama-3.1-8b-instant",
-        "llama3-groq-70b-8192-tool-use-preview",
-        "llama3-groq-8b-8192-tool-use-preview",
-        "mixtral-8x7b-32768",
-    ]
-    try:
-        client = groq.Groq(api_key=api_key)
-        available = {m.id for m in client.models.list().data}
-        for candidate in preferred_models:
-            if candidate in available:
-                return candidate
-    except Exception as e:
-        print(f"[AgentSentry] Discovery warning: {e}")
-
-    return "llama-3.3-70b-versatile"
+    """Returns the verified Qwen model for tool calling support."""
+    return "qwen/qwen3.6-27b"
 
 # ── LLM Factory ───────────────────────────────────────────────────────────
 
