@@ -138,40 +138,23 @@ class AgentState(TypedDict):
 # ── Dynamic Model Discovery for Groq ─────────────────────────────────────
 
 def get_active_groq_model(api_key: str) -> str:
-    """Queries Groq directly to find an active text chat model supporting tool calling."""
+    """Queries Groq directly to find an active chat model with verified tool calling support."""
+    # Priority ordered by speed and native function-calling reliability
     preferred_models = [
         "llama-3.3-70b-versatile",
         "llama-3.1-8b-instant",
-        "llama-3.1-70b-versatile",
-        "llama3-70b-8192",
-        "llama3-8b-8192",
+        "llama3-groq-70b-8192-tool-use-preview",
+        "llama3-groq-8b-8192-tool-use-preview",
         "mixtral-8x7b-32768",
-        "gemma2-9b-it",
     ]
     try:
         client = groq.Groq(api_key=api_key)
-        all_models = [m.id for m in client.models.list().data]
-
-        # Strictly filter out audio, transcription, and embedding models
-        chat_models = {
-            m
-            for m in all_models
-            if not any(
-                bad in m.lower()
-                for bad in ["whisper", "tts", "audio", "embed", "vision"]
-            )
-        }
-
-        # Match in priority order
+        available = {m.id for m in client.models.list().data}
         for candidate in preferred_models:
-            if candidate in chat_models:
+            if candidate in available:
                 return candidate
-
-        # Fallback to any remaining chat model if available
-        if chat_models:
-            return sorted(list(chat_models))[0]
     except Exception as e:
-        print(f"[AgentSentry] Auto-discovery warning: {e}")
+        print(f"[AgentSentry] Discovery warning: {e}")
 
     return "llama-3.3-70b-versatile"
 
