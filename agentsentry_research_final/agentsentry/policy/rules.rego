@@ -1,6 +1,6 @@
 package agentsentry.authz
 
-default allow = false
+default allow = false;
 
 # --- Original rules (kept as-is, updated to Rego v1 syntax) ---
 #
